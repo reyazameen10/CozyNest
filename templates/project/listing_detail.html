@@ -1,0 +1,123 @@
+<!-- listing_detail.html -->
+<!-- This template is used to display the details of a specific listing on CozyNest. It shows the title, location, price per night, and description for that listing. -->
+<!-- Rey Ameen, CS412 -->
+
+{% extends "project/base.html" %}
+{% block content %}
+
+<div class="container py-5">
+
+<div class="bg-white rounded-4 shadow-sm p-5">
+
+<h1 class="fw-bold">{{ listing.title }}</h1>
+<p class="text-muted">{{ listing.location }}</p>
+
+<h3 class="fw-bold">
+${{ listing.price_per_night }}
+<span class="text-muted fs-6">/ night</span>
+</h3>
+
+{% if avg_rating %}
+<p class="text-warning fw-bold">★ {{ avg_rating|floatformat:1 }}</p>
+{% endif %}
+
+<p class="mt-4">{{ listing.description }}</p>
+
+{% if listing.image %}
+<img src="{{ listing.image.url }}"
+class="img-fluid rounded-4 shadow-sm w-100 mt-4"
+style="max-height:500px; object-fit:cover;">
+{% endif %}
+
+<form method="post" action="{% url 'toggle_favorite' listing.pk %}" class="mt-4">
+{% csrf_token %}
+<button class="btn btn-outline-danger rounded-pill">
+♡ Save to Favorites
+</button>
+</form>
+
+<div class="bg-light rounded-4 p-4 mt-5">
+<h3 class="fw-bold">Reserve this stay</h3>
+
+{% if user.is_authenticated %}
+<form method="post" action="{% url 'create_booking' listing.pk %}">
+{% csrf_token %}
+{{ booking_form.as_p }}
+<button class="btn btn-dark rounded-pill">Reserve Now</button>
+</form>
+{% else %}
+<p><a href="{% url 'login' %}">Login</a> to book.</p>
+{% endif %}
+</div>
+
+<div class="bg-light rounded-4 p-4 mt-5">
+<h3 class="fw-bold">Contact Host</h3>
+
+{% if user.is_authenticated %}
+<form method="post" action="{% url 'message_host' listing.pk %}">
+{% csrf_token %}
+{{ message_form.as_p }}
+<button class="btn btn-outline-dark rounded-pill">
+Send Message
+</button>
+</form>
+{% endif %}
+</div>
+
+<div class="mt-5">
+<h3 class="fw-bold">Guest Reviews</h3>
+
+{% for review in listing.reviews.all %}
+<div class="bg-light rounded-4 p-3 mb-3">
+<strong>{{ review.user.username }}</strong>
+<span class="float-end">★ {{ review.rating }}/5</span>
+<p class="mt-2 mb-0">{{ review.comment }}</p>
+</div>
+{% empty %}
+<p>No reviews yet.</p>
+{% endfor %}
+
+<a href="{% url 'add_review' listing.pk %}"
+class="btn btn-outline-dark rounded-pill mt-2">
+Leave Review
+</a>
+</div>
+
+<div class="mt-5">
+<h3 class="fw-bold mb-4">Similar stays nearby</h3>
+
+<div class="row g-4">
+{% for item in similar_listings %}
+<div class="col-md-4">
+<a href="{% url 'listing_detail' item.pk %}" class="text-decoration-none text-dark">
+
+<div class="card border-0 shadow-sm rounded-4 h-100">
+
+{% if item.image %}
+<img src="{{ item.image.url }}"
+class="card-img-top"
+style="height:180px; object-fit:cover;">
+{% endif %}
+
+<div class="card-body">
+<h6 class="fw-bold">{{ item.title }}</h6>
+<p class="text-muted">{{ item.location }}</p>
+<p class="fw-bold">${{ item.price_per_night }}/night</p>
+</div>
+
+</div>
+</a>
+</div>
+{% endfor %}
+</div>
+</div>
+
+<a href="{% url 'listing_list' %}"
+class="btn btn-outline-dark rounded-pill mt-5">
+← Back
+</a>
+
+</div>
+</div>
+
+{% endblock %}

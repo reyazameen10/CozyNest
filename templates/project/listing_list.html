@@ -1,0 +1,101 @@
+<!-- listing_list.html -->
+<!-- This template is used to display a list of all the listings available on CozyNest. It shows the title, location, and price per night for each listing. The title is a link that takes the user to the detail page for that listing. -->
+<!-- Rey Ameen, CS412 -->
+
+{% extends "project/base.html" %}
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="hero-glow p-5 mb-5 glass-box">
+        <h1 class="display-5 fw-bold">Find your next cozy stay</h1>
+        <p class="lead mb-0">Warm spaces, peaceful vibes, and memorable stays around Boston.</p>
+    </div>
+    
+
+    <form method="GET" class="row g-3 mb-5">
+        <div class="col-md-6">
+            <input type="text" name="search" class="form-control rounded-pill p-3"
+                   placeholder="Search city or title..."
+                   value="{{ request.GET.search }}">
+        </div>
+
+        <div class="col-md-3">
+            <input type="number" name="max_price"
+                   class="form-control rounded-pill p-3"
+                   placeholder="Max Price"
+                   value="{{ request.GET.max_price }}">
+        </div>
+
+        <div class="col-md-3 d-grid">
+            <button class="btn btn-dark rounded-pill p-3">Search</button>
+        </div>
+    </form>
+
+    <h2 class="fw-bold mb-4">Explore stays</h2>
+
+
+    <div class="row g-4">
+        {% for listing in listings %}
+        <div class="col-md-6 col-lg-4">
+
+            <a href="{% url 'listing_detail' listing.pk %}"
+               class="text-decoration-none text-dark">
+
+                <div class="card border-0 shadow-sm rounded-4 overflow-hidden h-100 listing-card">
+
+                    {% if listing.image %}
+                    <img src="{{ listing.image.url }}"
+                         class="card-img-top"
+                         style="height:240px; object-fit:cover;">
+                    {% endif %}
+
+                    <div class="card-body p-4">
+                        <h5 class="fw-bold mb-1">{{ listing.title }}</h5>
+
+                        {% if listing.avg_rating %}
+                            <p class="text-warning small mb-1">★ {{ listing.avg_rating|floatformat:1 }}</p>
+                        {% else %}
+                            <p class="text-warning small mb-1">★ New</p>
+                        {% endif %}
+
+                        <p class="text-muted">{{ listing.location }}</p>
+                        <p class="small text-muted">
+                            {{ listing.description|truncatewords:15 }}
+                        </p>
+
+                        <p class="fw-bold">
+                            ${{ listing.price_per_night }}
+                            <span class="text-muted fw-normal">/ night</span>
+                        </p>
+                    </div>
+
+                </div>
+            </a>
+
+        </div>
+        {% empty %}
+            <p>No listings found.</p>
+        {% endfor %}
+    </div>
+
+</div>
+
+<style>
+.hero-section{
+background:linear-gradient(135deg,#bac781,rgb(236, 133, 133),#f09e9e);
+}
+.listing-card{
+transition:.25s;
+}
+.listing-card:hover{
+transform:translateY(-8px);
+box-shadow:0 14px 30px rgba(245, 235, 235, 0.922);
+}
+.btn-dark{
+background:#070801;
+border:none;
+}
+</style>
+
+{% endblock %}

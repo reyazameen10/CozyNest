@@ -1,0 +1,16 @@
+<!-- signup.html -->
+<!-- Rey Ameen, CS412 -->
+
+{% extends "project/base.html" %}
+{% block content %}
+<div class="container py-5" style="max-width:700px;">
+    <div class="bg-white rounded-4 shadow-sm p-5">
+        <h2 class="fw-bold mb-4">Create account</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="btn btn-dark rounded-pill px-4">Sign up</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
