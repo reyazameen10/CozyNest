@@ -1,0 +1,30 @@
+<!-- Update Listing Template -->
+<!-- Rey Ameen, CS412 -->
+
+{% extends "project/base.html" %}
+{% block content %}
+
+<div class="detail-page">
+<div class="container py-5">
+<div class="cozy-detail-glass p-5 mx-auto">
+
+<h1 class="fw-bold mb-4">Update Listing</h1>
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <button class="btn btn-dark rounded-pill px-4">
+        Save Changes
+    </button>
+
+    <a href="{% url 'host_dashboard' %}" class="btn btn-outline-dark rounded-pill px-4">
+        Cancel
+    </a>
+</form>
+
+</div>
+</div>
+</div>
+
+{% endblock %}

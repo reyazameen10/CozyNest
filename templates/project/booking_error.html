@@ -1,0 +1,22 @@
+
+
+{% extends "project/base.html" %}
+
+{% block content %}
+<div class="detail-page">
+    <div class="container py-5 d-flex justify-content-center">
+        <div class="cozy-detail-glass p-5 text-center" style="max-width: 600px;">
+            <h2 class="fw-bold mb-3">Dates Not Available</h2>
+
+            <p class="text-muted">
+                Sorry, this place is already booked for those dates.
+                Please choose different check-in and check-out dates.
+            </p>
+
+            <a href="{% url 'listing_detail' listing.pk %}" class="btn btn-dark rounded-pill px-4">
+                Go Back
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

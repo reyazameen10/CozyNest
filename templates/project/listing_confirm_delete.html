@@ -1,0 +1,21 @@
+<!-- listing_confirm_delete.html -->
+ <!-- Rey Ameen, CS412 -->
+
+{% extends "project/base.html" %}
+
+{% block content %}
+<div class="container py-5 d-flex justify-content-center">
+    <div style="max-width: 500px; width: 100%;">
+        <div class="bg-dark text-white p-4 rounded shadow text-center">
+            <h2>Delete Listing</h2>
+            <p>Are you sure you want to delete this listing?</p>
+
+            <form method="POST">
+                {% csrf_token %}
+                <button class="btn btn-danger">Yes, Delete</button>
+                <a href="{% url 'listing_detail' object.pk %}" class="btn btn-light">Cancel</a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

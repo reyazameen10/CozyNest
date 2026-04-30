@@ -5,9 +5,9 @@
 {% extends "project/base.html" %}
 {% block content %}
 
+<div class="detail-page">
 <div class="container py-5">
-
-<div class="bg-white rounded-4 shadow-sm p-5">
+<div class="cozy-detail-glass p-5">
 
 <h1 class="fw-bold">{{ listing.title }}</h1>
 <p class="text-muted">{{ listing.location }}</p>
@@ -29,15 +29,26 @@ class="img-fluid rounded-4 shadow-sm w-100 mt-4"
 style="max-height:500px; object-fit:cover;">
 {% endif %}
 
-<form method="post" action="{% url 'toggle_favorite' listing.pk %}" class="mt-4">
-{% csrf_token %}
-<button class="btn btn-outline-danger rounded-pill">
-♡ Save to Favorites
-</button>
-</form>
+<div class="mt-4">
+    {% if user.is_authenticated %}
+    <form method="post" action="{% url 'toggle_favorite' listing.pk %}">
+        {% csrf_token %}
+        <button class="btn btn-outline-danger rounded-pill">
+            ♡ Save to Favorites
+        </button>
+    </form>
+    {% else %}
+    <a href="{% url 'login' %}" class="btn btn-outline-danger rounded-pill">
+        ♡ Login to Save Favorite
+    </a>
+    <p class="small text-muted mt-2">
+        Please login to save this stay to your favorites.
+    </p>
+    {% endif %}
+</div>
 
-<div class="bg-light rounded-4 p-4 mt-5">
-<h3 class="fw-bold">Reserve this stay</h3>
+<div class="booking-card mt-5">
+<h3 class="fw-bold mb-3">Reserve this stay</h3>
 
 {% if user.is_authenticated %}
 <form method="post" action="{% url 'create_booking' listing.pk %}">
@@ -50,8 +61,8 @@ style="max-height:500px; object-fit:cover;">
 {% endif %}
 </div>
 
-<div class="bg-light rounded-4 p-4 mt-5">
-<h3 class="fw-bold">Contact Host</h3>
+<div class="booking-card mt-5">
+<h3 class="fw-bold mb-3">Contact Host</h3>
 
 {% if user.is_authenticated %}
 <form method="post" action="{% url 'message_host' listing.pk %}">
@@ -77,10 +88,16 @@ Send Message
 <p>No reviews yet.</p>
 {% endfor %}
 
+{% if user.is_authenticated %}
 <a href="{% url 'add_review' listing.pk %}"
-class="btn btn-outline-dark rounded-pill mt-2">
-Leave Review
+   class="btn btn-outline-dark rounded-pill mt-2">
+    Leave Review
 </a>
+{% else %}
+<div class="alert alert-light border rounded-4 mt-3">
+    ⭐ Please <a href="{% url 'login' %}">login</a> to leave a review.
+</div>
+{% endif %}
 </div>
 
 <div class="mt-5">
@@ -117,6 +134,7 @@ class="btn btn-outline-dark rounded-pill mt-5">
 ← Back
 </a>
 
+</div>
 </div>
 </div>
 

@@ -13,13 +13,72 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
 <style>
+/* Base styles for the CozyNest application. This includes the overall layout, navbar styling, content card designs, and form controls. The design emphasizes a cozy and inviting atmosphere with soft colors, glassmorphism effects, and smooth transitions. */
+.navbar .btn:hover,
+.navbar a:hover {
+    color: #2b211b !important;
+    background-color: #f3eadf !important;
+}
+
 body{
-background:
-linear-gradient(rgba(72, 71, 42, 0.48), rgba(202, 75, 33, 0.48)),
-url('https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1600&q=80');
-background-size:cover;
-background-position:center;
-background-attachment:fixed;
+    background:
+        linear-gradient(rgba(58,38,22,.62), rgba(58,38,22,.62)),
+        url('https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1600&q=80');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    font-family: 'Segoe UI', sans-serif;
+    color: #2d2d2d;
+}
+
+/* content cards */
+.cozy-detail-glass{
+    max-width: 950px;
+    margin: auto;
+    background: rgba(255,245,235,0.72);
+    backdrop-filter: blur(26px) saturate(180%);
+    -webkit-backdrop-filter: blur(26px) saturate(180%);
+    border: 1px solid rgba(255,255,255,0.35);
+    border-radius: 30px;
+    padding: 45px;
+    box-shadow:
+        0 25px 70px rgba(0,0,0,.45),
+        inset 0 1px 0 rgba(255,255,255,.35);
+    color:#111827;
+}
+
+.sub-glass-panel,
+.bg-light{
+    background: rgba(255,255,255,.55) !important;
+    backdrop-filter: blur(18px) saturate(180%);
+    -webkit-backdrop-filter: blur(18px) saturate(180%);
+    border: 1px solid rgba(255,255,255,.35);
+    border-radius: 24px !important;
+}
+
+.cozy-detail-glass img{
+    border-radius: 24px !important;
+    box-shadow: 0 18px 40px rgba(0,0,0,.25);
+}
+
+.home-page{
+    background:
+        linear-gradient(rgba(58,38,22,.62), rgba(58,38,22,.62)),
+        url('https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1600&q=80');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    min-height: 100vh;
+}
+
+.detail-page{
+    background:
+        linear-gradient(rgba(0,0,0,.58), rgba(0,0,0,.58)),
+        url('https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1600&q=80');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    min-height: 100vh;
 }
 
 /* navbar */
@@ -48,58 +107,244 @@ background-attachment:fixed;
 
 /* hero glow */
 .hero-glow{
-    background: linear-gradient(135deg,#ee8686,#78d3e1);
-    box-shadow:0 20px 50px rgba(0,0,0,.08);
+    background: rgba(255,245,235,0.62);
+    backdrop-filter: blur(26px) saturate(180%);
+    -webkit-backdrop-filter: blur(26px) saturate(180%);
+    border: 1px solid rgba(255,255,255,0.34);
+    border-radius: 30px;
+    box-shadow: 0 18px 42px rgba(0,0,0,0.22);
 }
 
 .glass-box{
-    backdrop-filter: blur(18px);
-    background: rgba(255,245,235,.90);
-    backdrop-filter: blur(10px);
-    border:1px solid rgba(255,255,255,.22);
-    box-shadow:0 10px 30px rgba(0,0,0,.12);
+    background: rgba(255,245,235,0.58);
+    backdrop-filter: blur(26px) saturate(180%);
+    -webkit-backdrop-filter: blur(26px) saturate(180%);
+    border: 1px solid rgba(255,255,255,0.28);
 }
 
 /* cards hover */
 .card{
-    transition:all .25s ease;
+    position: relative;
+    background: transparent;
+    border: none;
+    overflow: visible;
+    box-shadow: none;
 }
 
-.card:hover{
-    transform:translateY(-6px);
-    box-shadow:0 16px 30px rgba(236, 239, 229, 0.068);
-}
-
-.card{
-    transition: all .25s ease;
+.card-image-wrap{
     overflow: hidden;
+    border-radius: 28px;
+    box-shadow: 0 18px 36px rgba(0,0,0,0.24);
 }
 
 .card img{
     transition: transform .4s ease;
-}
-
-.card:hover{
-    transform: translateY(-6px);
-    box-shadow: 0 16px 30px rgba(0,0,0,.12);
+    display: block;
+    width: 100%;
 }
 
 .card:hover img{
-    transform: scale(1.05);
+    transform: scale(1.04);
 }
 
+.card-glass-body{
+    background: rgba(255,245,235,0.52) !important;
+    backdrop-filter: blur(26px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(26px) saturate(180%) !important;
+
+    border: 1px solid rgba(255,255,255,0.34);
+    border-radius: 24px;
+
+    box-shadow:
+        0 14px 34px rgba(0,0,0,0.22),
+        inset 0 1px 0 rgba(255,255,255,0.35);
+
+    color: #1a1a1a;
+}
+
+.card-glass-body h5{
+    font-weight: 700;
+    letter-spacing: -0.3px;
+}
+
+.card-glass-body p{
+    color: rgba(25,25,25,0.82) !important;
+}
+
+.listing-card{
+    transition: transform .25s ease;
+}
+
+.listing-card:hover{
+    transform: translateY(-6px);
+}
+
+/* form controls */
 .form-control{
-    background: rgba(255,255,255,.88);
-    backdrop-filter: blur(8px);
-    border: none;
-    box-shadow: 0 4px 14px rgba(0,0,0,.08);
+    background: rgba(255,248,242,0.72) !important;
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255,255,255,0.30);
+    box-shadow: 0 10px 22px rgba(0,0,0,0.16);
+    color: #1e1e1e;
+}
+
+.form-control::placeholder{
+    color: rgba(40,40,40,0.55);
 }
 
 .form-control:focus{
-    background: rgba(255,255,255,.95);
-    box-shadow: 0 0 0 0.2rem rgba(255,255,255,.25);
+    background: rgba(255,255,255,0.24) !important;
+    border: 1px solid rgba(255,255,255,0.34);
+    box-shadow: 0 0 0 0.2rem rgba(255,255,255,0.10);
+}
+
+/* ===== PREMIUM NAVBAR BUTTONS ===== */
+.navbar .btn {
+    font-weight: 700;
+    letter-spacing: .2px;
+    padding: 10px 18px;
+    border-radius: 999px;
+    transition: all .25s ease;
+}
+
+.navbar .btn:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 10px 24px rgba(0,0,0,.18);
+}
+
+.navbar .btn-dark {
+    background: linear-gradient(135deg,#2d2d2d,#5c4332);
     border: none;
 }
+
+.navbar .btn-outline-dark {
+    background: rgba(255,255,255,.55);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(0,0,0,.15);
+}
+
+/* ===== HOST DASHBOARD STAT BOXES ===== */
+.dashboard-stat {
+    background: rgba(255,245,235,.78);
+    backdrop-filter: blur(18px);
+    border-radius: 26px;
+    padding: 28px;
+    box-shadow: 0 16px 38px rgba(0,0,0,.18);
+    border: 1px solid rgba(255,255,255,.30);
+}
+
+.dashboard-stat h2 {
+    font-size: 2rem;
+    font-weight: 900;
+    margin-bottom: 0;
+}
+
+.dashboard-stat p {
+    color: #555;
+    margin: 0;
+    font-weight: 600;
+}
+
+/* ===== DASHBOARD PANELS ===== */
+.dashboard-section {
+    background: rgba(255,245,235,.80);
+    backdrop-filter: blur(24px);
+    border-radius: 28px;
+    padding: 28px;
+    margin-bottom: 28px;
+    box-shadow: 0 18px 48px rgba(0,0,0,.22);
+    border: 1px solid rgba(255,255,255,.30);
+}
+
+.dashboard-item {
+    background: rgba(255,255,255,.72);
+    border-radius: 22px;
+    padding: 18px;
+    margin-bottom: 14px;
+    border: 1px solid rgba(255,255,255,.35);
+    transition: all .25s ease;
+}
+
+.dashboard-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 28px rgba(0,0,0,.12);
+}
+
+/* ===== BETTER ACTION BUTTONS ===== */
+.action-btn {
+    display: inline-block;
+    padding: 7px 14px;
+    font-size: .82rem;
+    font-weight: 700;
+    border-radius: 999px;
+    text-decoration: none;
+    margin-left: 6px;
+}
+
+.edit-btn {
+    background: #2d2d2d;
+    color: white;
+}
+
+.edit-btn:hover {
+    color: white;
+    background: #111;
+}
+
+.delete-btn {
+    background: #fff3f3;
+    color: #c1121f;
+    border: 1px solid #ffb3b3;
+}
+
+.delete-btn:hover {
+    background: #c1121f;
+    color: white;
+}
+
+.booking-card {
+    background: rgba(255, 250, 245, 0.82);
+    backdrop-filter: blur(22px) saturate(170%);
+    -webkit-backdrop-filter: blur(22px) saturate(170%);
+    border: 1px solid rgba(255,255,255,0.45);
+    border-radius: 28px;
+    padding: 30px;
+    box-shadow: 0 18px 45px rgba(0,0,0,0.18);
+}
+
+.booking-card h3 {
+    font-size: 1.8rem;
+    color: #111827;
+}
+
+.booking-card label {
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.booking-card input,
+.booking-card textarea {
+    width: 100%;
+    border-radius: 16px;
+    border: 1px solid rgba(0,0,0,0.12);
+    padding: 12px 14px;
+    background: rgba(255,255,255,0.88);
+    box-shadow: inset 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.booking-card button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    font-weight: 700;
+    border-radius: 999px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.18);
+}
+
+.booking-card textarea {
+    min-height: 120px;
+}
+
 </style>
 
 </head>
@@ -123,6 +368,14 @@ Feel at home, anywhere
 
 <a href="{% url 'host_dashboard' %}" class="btn btn-outline-dark rounded-pill px-4">
 Host Dashboard
+</a>
+
+<a href="{% url 'my_hub' %}" class="btn btn-outline-dark rounded-pill px-4">
+My Hub
+</a>
+
+<a href="{% url 'create_listing' %}" class="btn btn-dark rounded-pill px-4">
+Add Listing
 </a>
 
 <span class="fw-bold">Hi, {{ user.username }}</span>

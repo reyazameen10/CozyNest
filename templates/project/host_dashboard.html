@@ -4,73 +4,86 @@
 
 {% block content %}
 <div class="container py-5">
-    <h1 class="fw-bold mb-4">Host Dashboard</h1>
+
+    <h1 class="fw-bold mb-4 text-light">Host Dashboard</h1>
 
     <div class="row g-4 mb-5">
         <div class="col-md-3">
-            <div class="bg-white rounded-4 shadow-sm p-4 text-center">
-                <h2 class="fw-bold">{{ my_listings.count }}</h2>
-                <p class="text-muted mb-0">Listings</p>
+            <div class="dashboard-stat">
+                <h2>{{ my_listings.count }}</h2>
+                <p>Listings</p>
             </div>
         </div>
 
         <div class="col-md-3">
-            <div class="bg-white rounded-4 shadow-sm p-4 text-center">
-                <h2 class="fw-bold">{{ bookings.count }}</h2>
-                <p class="text-muted mb-0">Reservations</p>
+            <div class="dashboard-stat">
+                <h2>{{ bookings.count }}</h2>
+                <p>Reservations</p>
             </div>
         </div>
 
         <div class="col-md-3">
-            <div class="bg-white rounded-4 shadow-sm p-4 text-center">
-                <h2 class="fw-bold">{{ messages.count }}</h2>
-                <p class="text-muted mb-0">Messages</p>
+            <div class="dashboard-stat">
+                <h2>{{ messages.count }}</h2>
+                <p>Messages</p>
             </div>
         </div>
 
         <div class="col-md-3">
-            <div class="bg-white rounded-4 shadow-sm p-4 text-center">
-                <h2 class="fw-bold">{{ reviews.count }}</h2>
-                <p class="text-muted mb-0">Reviews</p>
+            <div class="dashboard-stat">
+                <h2>{{ reviews.count }}</h2>
+                <p>Reviews</p>
             </div>
         </div>
     </div>
 
-    <div class="bg-white rounded-4 shadow-sm p-4 mb-4">
-        <h3 class="fw-bold mb-4">My Listings</h3>
+    <div class="dashboard-section">
+        <h3>My Listings</h3>
+
         {% for listing in my_listings %}
-            <div class="border rounded-4 p-3 mb-3">
-                <h5 class="fw-bold mb-1">{{ listing.title }}</h5>
-                <p class="text-muted mb-1">{{ listing.location }}</p>
-                <p class="mb-0">${{ listing.price_per_night }}/night</p>
+            <div class="dashboard-item">
+                <div class="d-flex justify-content-between align-items-start">
+                    <div>
+                        <h5 class="fw-bold mb-1">{{ listing.title }}</h5>
+                        <p class="text-muted mb-1">{{ listing.location }}</p>
+                        <p class="mb-0 fw-bold">${{ listing.price_per_night }}/night</p>
+                    </div>
+
+                    <div>
+                        <a href="{% url 'update_listing' listing.pk %}" class="action-btn edit-btn">Edit</a>
+                        <a href="{% url 'delete_listing' listing.pk %}" class="action-btn delete-btn">Delete</a>
+                    </div>
+                </div>
             </div>
         {% empty %}
             <p class="text-muted">No listings assigned to you.</p>
         {% endfor %}
     </div>
 
-    <div class="bg-white rounded-4 shadow-sm p-4 mb-4">
-        <h3 class="fw-bold mb-4">Reservations</h3>
+    <div class="dashboard-section">
+        <h3>Reservations</h3>
+
         {% for booking in bookings %}
-            <div class="border rounded-4 p-3 mb-3">
-                <p class="mb-1"><strong>Guest:</strong> {{ booking.user.username }}</p>
-                <p class="mb-1"><strong>Listing:</strong> {{ booking.listing.title }}</p>
-                <p class="mb-1"><strong>Check-in:</strong> {{ booking.check_in_date }}</p>
-                <p class="mb-1"><strong>Check-out:</strong> {{ booking.check_out_date }}</p>
-                <p class="mb-0"><strong>Total:</strong> ${{ booking.total_price }}</p>
+            <div class="dashboard-item">
+                <p><strong>Guest:</strong> {{ booking.user.username }}</p>
+                <p><strong>Listing:</strong> {{ booking.listing.title }}</p>
+                <p><strong>Check-in:</strong> {{ booking.check_in_date }}</p>
+                <p><strong>Check-out:</strong> {{ booking.check_out_date }}</p>
+                <p class="fw-bold mb-0"><strong>Total:</strong> ${{ booking.total_price }}</p>
             </div>
         {% empty %}
             <p class="text-muted">No reservations yet.</p>
         {% endfor %}
     </div>
 
-    <div class="bg-white rounded-4 shadow-sm p-4 mb-4">
-        <h3 class="fw-bold mb-4">Messages</h3>
+    <div class="dashboard-section">
+        <h3>Messages</h3>
+
         {% for message in messages %}
-            <div class="border rounded-4 p-3 mb-3">
-                <p class="mb-1"><strong>From:</strong> {{ message.sender.username }}</p>
-                <p class="mb-1"><strong>Listing:</strong> {{ message.listing.title }}</p>
-                <p class="mb-1"><strong>Sent:</strong> {{ message.sent_at|date:"M d, Y H:i" }}</p>
+            <div class="dashboard-item">
+                <p><strong>From:</strong> {{ message.sender.username }}</p>
+                <p><strong>Listing:</strong> {{ message.listing.title }}</p>
+                <p><strong>Sent:</strong> {{ message.sent_at|date:"M d, Y H:i" }}</p>
                 <p class="mb-0">{{ message.content }}</p>
             </div>
         {% empty %}
@@ -78,18 +91,20 @@
         {% endfor %}
     </div>
 
-    <div class="bg-white rounded-4 shadow-sm p-4">
-        <h3 class="fw-bold mb-4">Reviews</h3>
+    <div class="dashboard-section">
+        <h3>Reviews</h3>
+
         {% for review in reviews %}
-            <div class="border rounded-4 p-3 mb-3">
-                <p class="mb-1"><strong>User:</strong> {{ review.user.username }}</p>
-                <p class="mb-1"><strong>Listing:</strong> {{ review.listing.title }}</p>
-                <p class="mb-1"><strong>Rating:</strong> ★ {{ review.rating }}/5</p>
+            <div class="dashboard-item">
+                <p><strong>User:</strong> {{ review.user.username }}</p>
+                <p><strong>Listing:</strong> {{ review.listing.title }}</p>
+                <p><strong>Rating:</strong> ★ {{ review.rating }}/5</p>
                 <p class="mb-0">{{ review.comment }}</p>
             </div>
         {% empty %}
             <p class="text-muted">No reviews yet.</p>
         {% endfor %}
     </div>
+
 </div>
 {% endblock %}
