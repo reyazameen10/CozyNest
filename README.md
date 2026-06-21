@@ -1,6 +1,6 @@
 # CozyNest
 
-A full-stack Airbnb-inspired vacation rental platform where travelers can discover and book unique cozy stays, and hosts can manage their properties and guests — built with Django using class-based views, Django ORM, and full CRUD operations.
+A full-stack Airbnb-inspired vacation rental platform where travelers can discover and book unique cozy stays, and hosts can manage their properties and guests built with Django using class-based views, Django ORM, and full CRUD operations.
 
 ## Tech Stack
 ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
