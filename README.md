@@ -21,7 +21,7 @@ A full-stack Airbnb-inspired vacation rental platform where travelers can discov
 
 ### Host Dashboard
 - Dedicated host dashboard to manage all property listing
-- Add, update, adn delete listing with image uploads
+- Add, update, and delete listing with image uploads
 - View all reservations, guest messages, and review per listing
 - See total booking prices and guest details at a glance
 
