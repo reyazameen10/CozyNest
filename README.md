@@ -17,7 +17,7 @@ A full-stack Airbnb-inspired vacation rental platform where travelers can discov
 - Save listing to a personal favorites collection
 - Leave reviews on completed stays
 - Message hosts directly from a listing page
-
+ 
 
 ### Host Dashboard
 - Dedicated host dashboard to manage all property listing
